@@ -95,7 +95,7 @@ userSchema.methods.publicData = function () {
 userSchema.methods.generateAutentication = async function () {
 
     const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'secret')
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_TOKEN)
 
     user.tokens = user.tokens.concat({ token })
     await user.save()
@@ -111,10 +111,11 @@ userSchema.statics.findByCrudentials = async (email, password) => {
     if (!user) {
         throw new Error('Unable to login - e')
     }
-    console.log(user.email)
-    console.log('bycrypt database password - ' + user.password + ' get password - ' + password)
-    const isMatch = bycrypt.compare(password, user.password)
+    //console.log(user.email)
+    //console.log('bycrypt database password - ' + user.password + ' get password - ' + password)
+    const isMatch = await bycrypt.compare(password, user.password)
 
+    //console.log(isMatch)
     if (!isMatch) {
         throw new Error('Unable to login - p')
     }

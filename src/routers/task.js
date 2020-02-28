@@ -107,7 +107,7 @@ router.patch('/task/:id', auth, async (req, res) => {
 
         res.status(201).send(task)
     } catch (e) {
-        res.status(500).send(e)
+        res.status(400).send(e)
     }
 })
 router.delete('/task/:id', auth, async (req, res) => {
@@ -122,7 +122,7 @@ router.delete('/task/:id', auth, async (req, res) => {
 
         res.status(200).send(task)
     } catch (e) {
-        res.status(500).send(e)
+        res.status(400).send(e)
     }
 })
 

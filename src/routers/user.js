@@ -78,7 +78,7 @@ router.post('/user/login', async (req, res) => {
         res.send({ user: user.publicData(), token })
 
     } catch (e) {
-        res.send(e)
+        res.status(404).send(e)
     }
 
 })
